@@ -93,3 +93,54 @@ footer {
 .skill-card h3 {
     margin-top: 0;
 }
+/* Cost Calculator */
+#cost-calculator {
+    margin: 40px 0;
+    padding: 25px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+#cost-calculator h2 {
+    margin-top: 0;
+}
+
+.calculator-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.calculator-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.calculator-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#calculate-button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#calculate-button:hover {
+    background-color: #555;
+}
+
+#calculation-result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}

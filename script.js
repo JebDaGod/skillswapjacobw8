@@ -89,6 +89,37 @@ if (typeof document !== 'undefined') {
 
         // Display all skills initially
         displaySkills('All');
+
+        // Cost calculator
+        const calculateButton = document.getElementById("calculate-button");
+        const hourlyRateInput = document.getElementById("hourly-rate");
+        const hoursInput = document.getElementById("hours");
+        const calculationResult = document.getElementById("calculation-result");
+
+        if (calculateButton && hourlyRateInput && hoursInput && calculationResult) {
+            calculateButton.addEventListener('click', () => {
+                const hourlyRate = parseFloat(hourlyRateInput.value);
+                const hours = parseFloat(hoursInput.value);
+
+                if (
+                    hourlyRateInput.value === '' ||
+                    hoursInput.value === '' ||
+                    !Number.isFinite(hourlyRate) ||
+                    !Number.isFinite(hours) ||
+                    hourlyRate < 0 ||
+                    hours < 0
+                ) {
+                    calculationResult.innerHTML = '<h3>Please enter valid, non-negative numbers.</h3>';
+                    return;
+                }
+
+                const totalCost = calculateTotalCosts(hourlyRate, hours);
+
+                calculationResult.innerHTML = `
+                    <h3>Total Cost: $${totalCost.toFixed(2)}</h3>
+                `;
+            });
+        }
     });
 }
 
