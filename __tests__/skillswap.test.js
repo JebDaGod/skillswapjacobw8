@@ -1,5 +1,8 @@
 
-const { filterSkillsByCategory } = require('../script');
+const {
+    filterSkillsByCategory,
+    calculateTotalCosts
+} = require('../script');
 
 describe('filterSkillsByCategory', () => {
   const skills = [
@@ -29,4 +32,20 @@ describe('filterSkillsByCategory', () => {
 
     expect(result).toEqual([]);
   });
+});
+
+describe('calculateTotalCosts', () => {
+    test('Returns correct costs for different hourly rates and hours', () => {
+        expect(calculateTotalCosts(20, 2)).toBe(40);
+        expect(calculateTotalCosts(25, 3)).toBe(75);
+    });
+
+    test('Handles free sessions and zero hours', () => {
+        expect(calculateTotalCosts(0, 3)).toBe(0);
+        expect(calculateTotalCosts(20, 0)).toBe(0);
+    });
+
+    test('Calculates costs correctly for decimal hours', () => {
+        expect(calculateTotalCosts(25, 1.5)).toBe(37.5);
+    });
 });
