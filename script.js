@@ -43,6 +43,13 @@ function filterSkillsByCategory(skills, category) {
 function calculateTotalCosts(hourlyRate, hours) {
     return hourlyRate * hours;
 }
+// Skill matching
+function matchSkillsToUser(userNeeds, skills) {
+    return skills.filter(skill =>
+        skill.category === userNeeds.category &&
+        skill.price <= userNeeds.maxPrice
+    );
+}
 
 // Browser functionality
 if (typeof document !== 'undefined') {
@@ -127,6 +134,7 @@ if (typeof document !== 'undefined') {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         filterSkillsByCategory,
-        calculateTotalCosts
+        calculateTotalCosts,
+        matchSkillsToUser
     };
 }
