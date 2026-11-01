@@ -12,24 +12,25 @@ const skills = [
         category: "Music",
         description: "Learn guitar basics, chords, and popular songs.",
         price: 15,
-        provider: "Hunter"
+        provider: "Jordan"
     },
     {
         title: "Resume Review",
         category: "Career",
         description: "Get feedback and advice to improve your resume.",
         price: 0,
-        provider: "Abby"
+        provider: "Taylor"
     },
     {
         title: "Web Development",
         category: "Programming",
         description: "Learn HTML, CSS, and JavaScript basics.",
         price: 25,
-        provider: "Robert"
+        provider: "Morgan"
     }
 ];
 
+// Filter skills by category
 function filterSkillsByCategory(skills, category) {
     if (category === 'All') {
         return skills;
@@ -38,13 +39,19 @@ function filterSkillsByCategory(skills, category) {
     return skills.filter(skill => skill.category === category);
 }
 
+// Calculate total cost
+function calculateTotalCosts(hourlyRate, hours) {
+    return hourlyRate * hours;
+}
+
+// Browser functionality
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
         const exploreButton = document.getElementById("exploreButton");
         const skillsContainer = document.getElementById("skills-container");
         const filterButtons = document.querySelectorAll(".filter-btn");
 
-        // Existing Explore button functionality
+        // Explore button
         if (exploreButton) {
             exploreButton.addEventListener("click", function () {
                 alert("Skill exploration features are coming soon!");
@@ -53,6 +60,8 @@ if (typeof document !== 'undefined') {
 
         // Display skill cards
         function displaySkills(category) {
+            if (!skillsContainer) return;
+
             const filteredSkills = filterSkillsByCategory(skills, category);
 
             skillsContainer.innerHTML = filteredSkills.map(skill => `
@@ -66,7 +75,7 @@ if (typeof document !== 'undefined') {
             `).join('');
         }
 
-        // Filter button functionality
+        // Category filter buttons
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const category = button.dataset.category;
@@ -78,12 +87,15 @@ if (typeof document !== 'undefined') {
             });
         });
 
-        // Display all skills when the page first loads
+        // Display all skills initially
         displaySkills('All');
     });
 }
 
-// Export function for Jest
+// Export functions for Jest testing
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { filterSkillsByCategory };
+    module.exports = {
+        filterSkillsByCategory,
+        calculateTotalCosts
+    };
 }
