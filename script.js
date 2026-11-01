@@ -43,6 +43,7 @@ function filterSkillsByCategory(skills, category) {
 function calculateTotalCosts(hourlyRate, hours) {
     return hourlyRate * hours;
 }
+
 // Skill matching
 function matchSkillsToUser(userNeeds, skills) {
     return skills.filter(skill =>
@@ -125,6 +126,50 @@ if (typeof document !== 'undefined') {
                 calculationResult.innerHTML = `
                     <h3>Total Cost: $${totalCost.toFixed(2)}</h3>
                 `;
+            });
+        }
+
+        // Find My Match
+        const findMatchButton = document.getElementById("find-match-button");
+        const matchCategory = document.getElementById("match-category");
+        const matchMaxPrice = document.getElementById("match-max-price");
+        const matchResults = document.getElementById("match-results");
+
+        if (findMatchButton && matchCategory && matchMaxPrice && matchResults) {
+            findMatchButton.addEventListener('click', () => {
+                const category = matchCategory.value;
+                const maxPrice = Number(matchMaxPrice.value);
+
+                if (
+                    matchMaxPrice.value.trim() === '' ||
+                    !Number.isFinite(maxPrice) ||
+                    maxPrice < 0
+                ) {
+                    matchResults.innerHTML = '<p>Please enter a valid maximum price of $0 or more.</p>';
+                    return;
+                }
+
+                const userNeeds = {
+                    category: category,
+                    maxPrice: maxPrice
+                };
+
+                const matchedSkills = matchSkillsToUser(userNeeds, skills);
+
+                if (matchedSkills.length === 0) {
+                    matchResults.innerHTML = '<p>No skills match your category and budget.</p>';
+                    return;
+                }
+
+                matchResults.innerHTML = matchedSkills.map(skill => `
+                    <div class="skill-card">
+                        <h3>${skill.title}</h3>
+                        <p>${skill.description}</p>
+                        <p><strong>Category:</strong> ${skill.category}</p>
+                        <p><strong>Price:</strong> $${skill.price.toFixed(2)}</p>
+                        <p><strong>Provider:</strong> ${skill.provider}</p>
+                    </div>
+                `).join('');
             });
         }
     });
