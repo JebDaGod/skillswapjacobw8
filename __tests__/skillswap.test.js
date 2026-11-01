@@ -1,5 +1,5 @@
 
-const filterSkillsByCategory = require('./filterSkillsByCategory');
+const { filterSkillsByCategory } = require('../script');
 
 describe('filterSkillsByCategory', () => {
   const skills = [
