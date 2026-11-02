@@ -70,6 +70,33 @@
                 <h3>Total Cost: $0.00</h3>
             </div>
         </section>
+
+        <section id="match-section">
+    <h2>Find My Match</h2>
+    <p>Choose a category and maximum price to find skills that fit your needs.</p>
+
+    <div class="match-form">
+        <label for="match-category">Category Preference:</label>
+        <select id="match-category">
+            <option value="Programming">Programming</option>
+            <option value="Music">Music</option>
+            <option value="Career">Career</option>
+        </select>
+
+        <label for="match-max-price">Maximum Price ($):</label>
+        <input
+            type="number"
+            id="match-max-price"
+            min="0"
+            step="0.01"
+            placeholder="Enter your budget"
+        >
+
+        <button id="find-match-button" type="button">Find My Match</button>
+    </div>
+
+    <div id="match-results" aria-live="polite"></div>
+</section>
     </main>
 
     <footer>
